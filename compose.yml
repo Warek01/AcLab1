@@ -1,0 +1,38 @@
+name: AcLab
+
+services:
+  db:
+    image: postgres:18-alpine
+    networks:
+      - ac-lab-network
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_DB: ${DB_NAME}
+    volumes:
+      - postgres-data:/var/lib/postgresql/data:rw
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    init: false
+    ports:
+      - "3000:3000"
+    environment:
+      DB_HOST: ${DB_HOST}
+      DB_PORT: ${DB_PORT}
+      DB_NAME: ${DB_NAME}
+      DB_USER: ${DB_USER}
+      DB_PASSWORD: ${DB_PASSWORD}
+    depends_on:
+      - db
+    networks:
+      ac-lab-network:
+
+volumes:
+  postgres-data:
+
+networks:
+  ac-lab-network:

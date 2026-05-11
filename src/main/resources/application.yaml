@@ -1,0 +1,22 @@
+spring:
+  application:
+    name: AcLab
+    version: 0.0.1-SNAPSHOT
+    group: org.example
+  datasource:
+    url: jdbc:postgresql://${DB_HOST}:${DB_PORT}/${DB_NAME}
+    username: ${DB_USER}
+    password: ${DB_PASSWORD}
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+  config:
+    import: optional:file:.env[.properties]
+  threads:
+    virtual:
+      enabled: true
+
+server:
+  address: 0.0.0.0
+  port: '3000'
