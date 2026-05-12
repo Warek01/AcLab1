@@ -21,7 +21,7 @@ public class MainService {
       log.info("Creating an app request");
 
       var appRequest = AppRequest.builder()
-         .delay(delay.get())
+         .delay(delay.orElse(null))
          .build();
       appRequestRepo.save(appRequest);
 
