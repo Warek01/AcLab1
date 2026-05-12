@@ -1,6 +1,7 @@
 FROM ubuntu:22.04
 
 ARG RUNNER_TOKEN
+ARG RUNNER_REPO
 
 RUN apt update && apt install -y \
     curl sudo git jq \
@@ -20,6 +21,6 @@ RUN tar xzf ./actions-runner-linux-x64-2.334.0.tar.gz
 
 RUN sudo ./bin/installdependencies.sh
 
-RUN ./config.sh --url https://github.com/Warek01/AcLab1 --token ${RUNNER_TOKEN}
+RUN ./config.sh --url ${RUNNER_REPO} --token ${RUNNER_TOKEN}
 
 ENTRYPOINT ["./run.sh"]
