@@ -4,8 +4,11 @@ ARG RUNNER_TOKEN
 ARG RUNNER_REPO
 
 RUN apt update && apt install -y \
-    curl sudo git jq \
+    curl sudo git jq ca-certificates gnupg lsb-release wget \
     && rm -rf /var/lib/apt/lists/*
+
+# Docker install
+RUN curl -fsSL https://get.docker.com | sh
 
 RUN useradd -m runner && echo "runner ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
 
