@@ -1,3 +1,5 @@
+#!/bin/bash
+
 RUNNER_REPO=${RUNNER_REPO:-"https://github.com/Warek01/AcLab1"}
 
 docker build \

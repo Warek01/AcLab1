@@ -26,4 +26,8 @@ RUN sudo ./bin/installdependencies.sh
 
 RUN ./config.sh --url ${RUNNER_REPO} --token ${RUNNER_TOKEN}
 
-ENTRYPOINT ["./run.sh"]
+COPY entrypoint.sh .
+COPY --chown=runner:runner entrypoint.sh .
+RUN chmod +x entrypoint.sh
+
+ENTRYPOINT ["./entrypoint.sh"]
