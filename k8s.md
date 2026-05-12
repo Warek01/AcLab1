@@ -12,3 +12,4 @@ kubectl create secret docker-registry regcred \
   --docker-email=your-email \
   -n aclab
 ```
+ 
