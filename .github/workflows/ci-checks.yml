@@ -21,6 +21,6 @@ jobs:
           java-version: 25
           cache: gradle
           distribution: temurin
-      - name: Unit Test
+      - name: Build And Test
         run: |
           ./gradlew build
