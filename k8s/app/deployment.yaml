@@ -51,12 +51,13 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: aclab
+  name: app
   namespace: aclab
 spec:
   selector:
-    app: aclab
+    app: app
   ports:
     - port: 80
       targetPort: 3000
+      nodePort: 30002
   type: NodePort
