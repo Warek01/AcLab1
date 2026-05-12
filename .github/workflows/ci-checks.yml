@@ -1,8 +1,5 @@
 name: CI Checks
 on:
-  push:
-    branches:
-      - main
   pull_request:
   workflow_dispatch:
 
@@ -10,8 +7,8 @@ jobs:
   ci-checks:
     name: Build & Test
     runs-on:
+      - ubuntu-22.04
       - self-hosted
-      # - ubuntu-22.04
     steps:
       - name: Checkout
         uses: actions/checkout@v6
