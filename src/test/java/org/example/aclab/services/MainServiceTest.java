@@ -38,13 +38,13 @@ class MainServiceTest {
    @Test
    void registerRequest_shouldReturnTest_whenDelayPresent() {
       String result = mainService.registerRequest(Optional.of(0));
-      assertThat(result).isEqualTo("Test");
+      assertThat(result).isEqualTo("Delay 0 millis");
    }
 
    @Test
    void registerRequest_shouldReturnTest_whenDelayIsEmpty() {
       String result = mainService.registerRequest(Optional.empty());
-      assertThat(result).isEqualTo("Test");
+      assertThat(result).isEqualTo("No Delay");
    }
 
    @Test

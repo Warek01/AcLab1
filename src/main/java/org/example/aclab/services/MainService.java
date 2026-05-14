@@ -5,6 +5,7 @@ import org.example.aclab.entities.AppRequest;
 import org.example.aclab.repositories.AppRequestRepository;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
@@ -32,7 +33,9 @@ public class MainService {
       }
 
       final long end = System.nanoTime() + TimeUnit.MILLISECONDS.toNanos(delay.get());
+      BigDecimal num = new BigDecimal(0);
       while (System.nanoTime() < end) {
+         num = num.multiply(new BigDecimal(2));
       }
 
       return "Delay %d millis".formatted(delay.get());
