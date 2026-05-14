@@ -35,7 +35,7 @@ public class MainService {
       final long end = System.nanoTime() + TimeUnit.MILLISECONDS.toNanos(delay.get());
       BigDecimal num = new BigDecimal(0);
       while (System.nanoTime() < end) {
-         num = num.multiply(new BigDecimal(2));
+         num = num.add(new BigDecimal(2));
       }
 
       return "Delay %d millis, result: %s".formatted(delay.get(), num.toString());

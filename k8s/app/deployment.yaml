@@ -24,7 +24,7 @@ spec:
       containers:
         - name: app
           image: warek01/aclab1:main
-          imagePullPolicy: IfNotPresent
+          imagePullPolicy: Always
           ports:
             - containerPort: 8080
           envFrom:
