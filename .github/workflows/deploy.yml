@@ -41,6 +41,6 @@ jobs:
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
-      - name: Deploy to Minikube
+      - name: Deploy to Kubernetes
         run: |
-          kubectl apply -n aclab -f k8s/app/deployment.yaml
+          kubectl apply -f k8s/app/deployment.yaml
