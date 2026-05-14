@@ -26,7 +26,7 @@ spec:
           image: warek01/aclab1:main
           imagePullPolicy: Always
           ports:
-            - containerPort: 8080
+            - containerPort: 3000
           envFrom:
             - secretRef:
                 name: aclab-secrets
