@@ -5,8 +5,10 @@ import org.example.aclab.entities.AppRequest;
 import org.example.aclab.repositories.AppRequestRepository;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
+import java.util.concurrent.TimeUnit;
 
 @Service
 @Slf4j
@@ -18,22 +20,22 @@ public class MainService {
    }
 
    public String registerRequest(Optional<Integer> delay) {
-      log.info("Creating an app request");
+      log.info("Creating an app request with {} delay", delay.isEmpty() ? "null" : delay.get());
 
-      var appRequest = AppRequest.builder()
+      final var appRequest = AppRequest.builder()
          .delay(delay.orElse(null))
          .build();
       appRequestRepo.save(appRequest);
 
-      try {
-         if (delay.isPresent()) {
-            Thread.sleep(delay.get());
-         }
-      } catch (InterruptedException _) {
-         return "Test (interrupted)";
+      if (delay.isEmpty()) {
+         return "No Delay";
       }
 
-      return "Test";
+      final long end = System.nanoTime() + TimeUnit.MILLISECONDS.toNanos(delay.get());
+      while (System.nanoTime() < end) {
+      }
+
+      return "Delay %d millis".formatted(delay.get());
    }
 
    public List<AppRequest> getRequests() {

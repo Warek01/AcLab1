@@ -6,7 +6,6 @@ metadata:
   labels:
     app: app
 spec:
-  replicas: 3
   strategy:
     type: RollingUpdate
     rollingUpdate:
@@ -37,20 +36,18 @@ spec:
               cpu: 250m
             limits:
               memory: 1024Mi
-              cpu: 1000m
+              cpu: 500m
           readinessProbe:
             httpGet:
               path: /actuator/health
               port: 3000
-              host: localhost
             initialDelaySeconds: 15
             periodSeconds: 10
           livenessProbe:
             httpGet:
               path: /actuator/health
               port: 3000
-              host: localhost
-            initialDelaySeconds: 20
+            initialDelaySeconds: 30
             periodSeconds: 10
 
 ---
@@ -68,3 +65,25 @@ spec:
       targetPort: 3000
       nodePort: 30002
   type: NodePort
+
+---
+
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: app
+  namespace: aclab
+spec:
+  minReplicas: 1
+  maxReplicas: 5
+  scaleTargetRef:
+    kind: Deployment
+    name: app
+    apiVersion: apps/v1
+  metrics:
+    - type: Resource
+      resource:
+        name: cpu
+        target:
+          type: Utilization
+          averageUtilization: 70
