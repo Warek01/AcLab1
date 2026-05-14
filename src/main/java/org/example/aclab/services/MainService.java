@@ -38,7 +38,7 @@ public class MainService {
          num = num.multiply(new BigDecimal(2));
       }
 
-      return "Delay %d millis".formatted(delay.get());
+      return "Delay %d millis, result: %s".formatted(delay.get(), num.toString());
    }
 
    public List<AppRequest> getRequests() {
