@@ -11,8 +11,6 @@ spring:
     hibernate:
       ddl-auto: update
     show-sql: true
-  config:
-    import: optional:file:.env[.properties]
   threads:
     virtual:
       enabled: true
@@ -20,3 +18,6 @@ spring:
 server:
   address: 0.0.0.0
   port: '3000'
+
+loki:
+  url: http://loki:3100/loki/api/v1/push

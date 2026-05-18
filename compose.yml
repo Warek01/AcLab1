@@ -1,4 +1,4 @@
-name: AcLab
+name: ac-lab
 
 services:
   db:
@@ -6,7 +6,7 @@ services:
     networks:
       - ac-lab-network
     ports:
-      - "5432:5432"
+      - "5433:5432"
     environment:
       POSTGRES_USER: ${DB_USER}
       POSTGRES_PASSWORD: ${DB_PASSWORD}
@@ -20,16 +20,30 @@ services:
     init: false
     ports:
       - "3000:3000"
-    environment:
-      DB_HOST: ${DB_HOST}
-      DB_PORT: ${DB_PORT}
-      DB_NAME: ${DB_NAME}
-      DB_USER: ${DB_USER}
-      DB_PASSWORD: ${DB_PASSWORD}
+    env_file:
+      - .env
     depends_on:
       - db
     networks:
-      ac-lab-network:
+      - ac-lab-network
+
+  loki:
+    image: grafana/loki:3.7.2
+    ports:
+      - "3100:3100"
+    networks:
+      - ac-lab-network
+
+  grafana:
+    image: grafana/grafana:9.1.7
+    ports:
+      - "10000:3000"
+    environment:
+      - GF_SECURITY_ADMIN_PASSWORD=admin
+    depends_on:
+      - loki
+    networks:
+      - ac-lab-network
 
 volumes:
   postgres-data:
